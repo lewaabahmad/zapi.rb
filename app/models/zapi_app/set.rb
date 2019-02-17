@@ -5,12 +5,8 @@ class ZapiApp::Set
     model_id = args[:model_id]
     url = URI.parse("https://www.zapi.app/api/v1/model/#{model_id}/instances?key=#{ENV['ZAPI_PRIVATE_KEY']}")
     res = Net::HTTP.get(url)
-    if res.code === '200'
-      JSON.parse(res.body)["data"].map do |i|
-        OpenStruct.new(i["attributes"].except("data").merge(i["attributes"]["data"]))
-      end
-    else
-      false
+    JSON.parse(res.body)["data"].map do |i|
+      OpenStruct.new(i["attributes"].except("data").merge(i["attributes"]["data"]))
     end
   end
 
