@@ -3,7 +3,7 @@ class ZapiApp::Set
   def self.fetch(args)
     # 20b4ca7d-ab24-406c-8838-493847330f8d
     model_id = args[:model_id]
-    url = URI.parse("http://localhost:3000/api/v1/model/#{model_id}/instances?key=#{ENV['ZAPI_PRIVATE_KEY']}")
+    url = URI.parse("https://www.zapi.app/api/v1/model/#{model_id}/instances?key=#{ENV['ZAPI_PRIVATE_KEY']}")
     req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
