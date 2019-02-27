@@ -22,16 +22,16 @@ Currently, this gem only provides functionality for the fetching of model instan
 
 The ids of instances and models can be gleamed from [the app](https://www.zapi.app/).
 
-###Fetch an individual instance of a model via:
+### Fetch an individual instance of a model via:
 
 ```ruby
 ZapiApp::Model.fetch({ instance_id: <INSTANCE_ID> })
 ```
 
-###Fetch all instances of a model via:
+### Fetch all instances of a model via:
 
 ```ruby
-ZapiApp::Set.fetch({ model: <MODEL_ID> })
+ZapiApp::Set.fetch({ model_id: <MODEL_ID> })
 ```
 
 ## Contributing
