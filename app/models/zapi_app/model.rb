@@ -1,7 +1,8 @@
 class ZapiApp::Model
 
-  def inititalize(args)
-    @model_id = args[:model_id]
+  def initialize(model_id, args={})
+    binding.pry
+    @model_id = model_id
   end
 
   def find(instance_id)
