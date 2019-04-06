@@ -1,11 +1,11 @@
 class ZapiApp::Model
 
-  def self.find(args)
-    instance_id = args[:instance_id]
-    url = URI.parse("https://www.zapi.app/api/v1/instances/#{instance_id}?key=#{ENV['ZAPI_PRIVATE_KEY']}")
-    res = Net::HTTP.get(url)
-    i = JSON.parse(res)["data"]
-    OpenStruct.new(i["attributes"].except("data").merge(i["attributes"]["data"]))
+  def inititalize(args)
+    @model_id = args[:model_id]
+  end
+
+  def find(instance_id)
+    ZapiApp::Instance.find(instance_id)
   end
 
   def find_by(args)
@@ -16,8 +16,11 @@ class ZapiApp::Model
     instances.map { |i| OpenStruct.new(i["attributes"].except("data").merge(i["attributes"]["data"])) }
   end
 
-  def self.model_struct
-    @model_struct ||= Struct.new("Post", :title, :content)
+  def all
+    url = URI.parse("https://www.zapi.app/api/v1/model/#{@model_id}/instances?key=#{ENV['ZAPI_PRIVATE_KEY']}")
+    res = Net::HTTP.get(url)
+    JSON.parse(res.body)["data"].map do |i|
+      OpenStruct.new(i["attributes"].except("data").merge(i["attributes"]["data"]))
+    end
   end
-
 end
